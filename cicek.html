@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İsminin Çiçeği</title>
+<style>
+:root{--ink:#3d3040;--muted:#796c7b;--pink:#cf5b87;--line:#f0dce5;--green:#4d8063;--cream:#fffaf6}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:24px 14px 40px;font-family:ui-rounded,"Segoe UI",system-ui,sans-serif;color:var(--ink);background:radial-gradient(ellipse at 12% 8%,#f8dbe8 0,transparent 32%),radial-gradient(ellipse at 90% 16%,#f4e5c7 0,transparent 28%),linear-gradient(145deg,#fffaf3,#f7e8ed)}main{width:min(100%,760px);margin:auto}.hero{text-align:center;margin:8px auto 22px}.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:800;color:#a45c7a}.hero h1{font:clamp(2rem,7vw,3.5rem)/1.08 Georgia,serif;color:#71455c;margin:10px 0}.hero p{color:var(--muted);line-height:1.55;margin:10px auto;max-width:530px}.panel{background:#ffffffd9;border:1px solid #f2dfe7;border-radius:26px;padding:clamp(16px,4vw,30px);box-shadow:0 18px 48px #9b547414}label{display:block;font-size:.93rem;font-weight:800;margin-bottom:9px}.entry{display:flex;gap:10px}input{min-width:0;flex:1;border:1.5px solid #ead5df;border-radius:14px;padding:14px 16px;font-size:1rem;outline:none;background:#fff;color:var(--ink)}input:focus{border-color:var(--pink);box-shadow:0 0 0 4px #d95f8318}button{border:0;border-radius:14px;padding:13px 18px;background:linear-gradient(135deg,#d95f83,#b84c78);color:#fff;font-weight:800;font-size:.94rem;cursor:pointer;transition:transform .18s,filter .18s}button:hover{filter:brightness(1.04);transform:translateY(-1px)}button:focus-visible{outline:3px solid #9c4569;outline-offset:3px}.hint{font-size:.82rem;color:#8b7c89;margin:10px 2px 0;line-height:1.5}.result{display:none;margin-top:25px;text-align:center}.result.show{display:block;animation:appear .35s ease both}.result h2{font:1.55rem Georgia,serif;margin:0 0 5px}.sub{color:var(--muted);margin:0 0 18px;font-size:.92rem}.scene{perspective:1000px;width:min(100%,330px);height:410px;margin:0 auto 16px;cursor:pointer;outline:none}.flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.2,.75,.2,1)}.scene.flipped .flip-inner{transform:rotateY(180deg)}.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:25px;border:1px solid #edd5df;overflow:hidden;box-shadow:0 16px 32px #713a501c}.back{background:linear-gradient(145deg,#fff8f4,#f4dce7);display:flex;align-items:center;justify-content:center;padding:20px}.back:before,.back:after{content:"";position:absolute;width:220px;height:220px;border:1px solid #dca5b9;border-radius:50%;opacity:.65}.back:after{transform:scale(.68)}.ornament{position:relative;z-index:1;width:185px;height:270px;border:1px solid #c98ca5;border-radius:100px 100px 80px 80px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff8f5b8}.mystery{width:150px;height:150px}.mystery svg{width:100%;height:100%;filter:drop-shadow(0 6px 5px #75405b25)}.back strong{font:1.45rem Georgia,serif;color:#8b4c68;margin-top:4px}.back small{letter-spacing:.16em;text-transform:uppercase;font-size:.62rem;color:#a66d83;margin-top:8px}.front{transform:rotateY(180deg);background:linear-gradient(155deg,#fffefa,#fff0f5);display:flex;flex-direction:column;align-items:center;padding:18px 18px 20px}.letter{position:absolute;top:13px;left:16px;font:1.05rem Georgia,serif;color:#bc7991}.art{height:245px;width:100%;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 65%,#f4dfe6 0%,#fffaf5 56%,transparent 76%)}.art svg{width:100%;height:100%;max-height:235px;filter:drop-shadow(0 9px 6px #69404a1c)}.item-name{font:1.8rem Georgia,serif;color:#6b4056;margin:2px 0 6px}.meaning{font-size:.9rem;line-height:1.5;color:#786b79;margin:0;max-width:260px}.tapnote{font-size:.8rem;color:#987a89;margin:0 0 14px}.again{background:#f7e7ed;color:#8a4b66;box-shadow:none;margin-top:2px}.foot{text-align:center;color:#a18d9b;font-size:.76rem;margin:22px 0 0;line-height:1.5}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@media(max-width:480px){.entry{flex-direction:column}.entry button{width:100%}.scene{height:385px}.art{height:220px}}
+</style></head>
+<body><main>
+<header class="hero"><div class="eyebrow">İsme özel küçük bir sürpriz</div><h1>İsminin Çiçeği</h1><p>İsmini yaz, gizemli kartını çevir ve sana eşleşen çiçeği keşfet.</p></header>
+<section class="panel">
+
+<label for="nameInput">Adın ne?</label>
+<div class="entry">
+  <input id="nameInput" maxlength="50" placeholder="İsmini buraya yaz" autocomplete="given-name">
+  <button id="revealBtn">Çiçeğimi bul ✨</button>
+</div>
+<p class="hint" id="hint">İsminin kombinasyonu eşleşmeyi belirler. Kartı çevirmek için üzerine dokun.</p>
+
+<section class="result" id="result" aria-live="polite">
+  <h2 id="resultTitle">Senin çiçeğin</h2>
+  <p class="sub" id="resultSub">Kartı çevir ve keşfet.</p>
+  <div class="scene" id="scene" role="button" tabindex="0" aria-label="Gizemli kartı çevir">
+    <div class="flip-inner">
+      <div class="face back">
+        <div class="ornament">
+          <div class="mystery" aria-hidden="true">
+            <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="qGrad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff5e9c"/><stop offset=".48" stop-color="#8b5cf6"/><stop offset="1" stop-color="#22b8cf"/></linearGradient>
+                <linearGradient id="petalQ" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff78b4"/><stop offset="1" stop-color="#9a72f5"/></linearGradient>
+              </defs>
+              <g transform="translate(90 90)">
+                <g fill="url(#petalQ)" stroke="#fff" stroke-opacity=".7" stroke-width="1.5">
+                  <ellipse cy="-51" rx="17" ry="31"/><ellipse cy="-51" rx="17" ry="31" transform="rotate(45)"/><ellipse cy="-51" rx="17" ry="31" transform="rotate(90)"/><ellipse cy="-51" rx="17" ry="31" transform="rotate(135)"/><ellipse cy="-51" rx="17" ry="31" transform="rotate(180)"/><ellipse cy="-51" rx="17" ry="31" transform="rotate(225)"/><ellipse cy="-51" rx="17" ry="31" transform="rotate(270)"/><ellipse cy="-51" rx="17" ry="31" transform="rotate(315)"/>
+                </g>
+                <circle r="28" fill="#fffaf4" stroke="#f8c9df" stroke-width="3"/>
+                <text x="0" y="19" text-anchor="middle" font-size="70" font-family="Georgia,serif" font-weight="bold" fill="url(#qGrad)">?</text>
+              </g>
+            </svg>
+          </div>
+          <strong>Sana özel</strong>
+          <small>Sürprizini keşfet</small>
+        </div>
+      </div>
+      <div class="face front" id="frontFace">
+        <span class="letter" id="cardPair">H</span>
+        <div class="art" id="itemArt"></div>
+        <div class="item-name" id="itemName">Gül</div>
+        <p class="meaning" id="meaning">Sevgi ve zarafet.</p>
+      </div>
+    </div>
+  </div>
+  <p class="tapnote">Kartı çevirmek için dokun veya Enter tuşuna bas.</p>
+  <button class="again" id="againBtn">Başka bir isim dene</button>
+</section>
+
+</section>
+<p class="foot">Eşleştirmeler eğlence amaçlıdır. Çift harf kombinasyonları ile ismine özel sonuç üretilir.</p>
+</main>
+
+<script>
+const flowerTypes=[
+  ['Gül','#d93858','#ffb0c1','#f5c45e','Sevgi, zarafet ve içtenliği simgeler.'],
+  ['Karanfil','#bd365c','#f7a3b8','#f7d56a','Sevgi ve inceliği çağrıştırır.'],
+  ['Lale','#e34b70','#ffb4c7','#f8d16b','Baharın ve zarafetin simgesidir.'],
+  ['Papatya','#fffdf1','#f7f0cf','#e9b63c','Sadelik ve neşeyi hatırlatır.'],
+  ['Orkide','#9a4d9c','#e9b6eb','#f6d878','Zarafet ve hayranlığı çağrıştırır.'],
+  ['Şakayık','#e85c93','#ffc1d8','#f4bd58','Bolluk ve güzellikle ilişkilendirilir.'],
+  ['Manolya','#f1c9d4','#fff0e9','#d9a84f','Dinginliği ve asaleti simgeler.'],
+  ['Sümbül','#7c68c8','#c7b9f1','#f5d56e','Bahar ve tazelenmeyi çağrıştırır.'],
+  ['Nergis','#f1d447','#fff2a6','#d89d29','Yenilenmeyi ve umudu simgeler.'],
+  ['İris','#6655bd','#b9a8f2','#f5d36a','Hayal gücü ve zarafetle anılır.'],
+  ['Gerbera','#f06c54','#ffb7a2','#f6d45c','Neşe ve iyimserliği simgeler.'],
+  ['Frezya','#e4a2bf','#ffe0ed','#e8bc50','Dostluk ve içtenliği çağrıştırır.'],
+  ['Ortanca','#5889d5','#b8d2f8','#eecb68','Minnettarlığı ve duygusal zenginliği anlatır.'],
+  ['Yasemin','#fffaf0','#f7e7d1','#e6bb55','Huzur ve narin güzelliği simgeler.'],
+  ['Begonya','#e94f75','#ffb7c8','#f5c45e','Canlılık ve sıcak dostluğu hatırlatır.'],
+  ['Ekinezya','#bd5a9e','#edb1dc','#b9794b','Dayanıklılık ve canlılığı simgeler.'],
+  ['Çiğdem','#8b6ad8','#d5c5ff','#f4d25f','Yeni başlangıçları anlatır.'],
+  ['Verbena','#b94e81','#f1b0d0','#e9c65b','Uyum ve pozitif enerjiyi çağrıştırır.'],
+  ['Cam güzeli','#ee638a','#ffc4d5','#f7d26d','Renkli ve canlı bir ruhu simgeler.'],
+  ['Şebboy','#b56e9f','#e9c1df','#eac45b','Kalıcı güzel anıları hatırlatır.'],
+  ['Ranunkulus','#e46e68','#ffc2b9','#f5cf60','Büyüleyici güzellik ve hayranlığı simgeler.'],
+  ['Hüsnüyusuf','#c74f73','#f7b1c3','#e8be5c','İncelik ve güzel duyguları çağrıştırır.'],
+  ['Japon gülü','#e74862','#ff9fac','#f4c85b','Canlılık ve cesareti simgeler.'],
+  ['Ölmez çiçek','#d6a52f','#ffe9a0','#a76b32','Kalıcı anıları ve dayanıklılığı anlatır.'],
+  ['Unutmabeni','#4d9fce','#a8dff5','#f4d66c','Bağlılık ve hatırlamayı simgeler.'],
+  ['Üçgül','#6b9e68','#b7d8a9','#edca60','Şansı ve birlikteliği çağrıştırır.'],
+  ['Devedikeni','#8060b5','#c8b4e9','#f0c866','Gücü ve bağımsızlığı simgeler.'],
+  ['İris mavisi','#526bc3','#b4c5ff','#f3d269','Dinginlik ve hayal gücünü çağrıştırır.'],
+  ['Açelya','#e95d9c','#ffc0de','#f5cf62','Zarif renkleri ve neşeyi simgeler.'],
+  ['Lotus','#df7b9f','#ffd1df','#edbd61','Denge and yenilenmeyi simgeler.'],
+  ['Kasımpatı','#df8b45','#ffd6a1','#d6b44c','Neşe ve uzun ömürlülüğü simgeler.'],
+  ['Mimoza','#e6b936','#fff0a0','#c88e2b','Dostluk ve duyarlılığı çağrıştırır.'],
+  ['Kaktüs','#52825d','#9ec9a7','#e8d36b','Dayanıklılığı ve zorluklara göğüs germeyi simgeler.'],
+  ['Menekşe','#7a52c8','#c7b4f5','#f5d36a','Alçakgönüllülüğü ve sadakati simgeler.'],
+  ['Krizantem','#d96b43','#ffd0a3','#e8be52','Mutluluk ve huzuru çağrıştırır.'],
+  ['Gülhatmi','#c45184','#f5b8d0','#f0cc6b','İhtişamı ve cömertliği simgeler.'],
+  ['Kartopu','#e2dedb','#ffffff','#e5d173','Saflığı ve masumiyeti hatırlatır.'],
+  ['Yıldız çiçeği','#d9435b','#ffb0bd','#f4cd61','Zarafeti ve kalıcı bağı simgeler.'],
+  ['Bahar dalı','#e29bb3','#fae1ea','#f1d875','Tazeliği ve neşeyi müjdeler.'],
+  ['Zambak','#d882b6','#fae0ef','#f2cc64','Asaleti ve gururu simgeler.'],
+  ['Kedi tırnağı','#d48c3f','#fae0ab','#edd165','Neşeli ve enerjik ruhu yansıtır.'],
+  ['Ateş çiçeği','#e04141','#ffa8a8','#f5d260','Tutkuyu ve coşkuyu simgeler.'],
+  ['Gelin duvağı','#e2a4be','#fceaf1','#f5d676','Zarif ve narin duruşu anlatır.'],
+  ['Bodur gül','#cf5379','#ffbfd2','#f2cb68','Sevimli ve samimi sevgiyi simgeler.'],
+  ['Mavi yıldız','#547bc4','#b8d0ff','#f4d56d','Huzur dolu derinlikleri simgeler.'],
+  ['Günebakan','#e6a822','#ffe38a','#b87c27','Neşeyi, pozitifliği ve enerjiyi simgeler.'],
+  ['Kadife çiçeği','#d9652b','#ffc49e','#edc75c','Sıcaklığı ve samimiyeti çağrıştırır.'],
+  ['Glden','#a8517e','#f2b8d5','#ebd069','Gizemli ve özel ruhları temsil eder.'],
+  ['Çan çiçeği','#676fd8','#c4c9ff','#f4d668','Minnettarlığı ve inceliği simgeler.'],
+  ['Adaçayı çiçeği','#788c74','#c5dbc1','#f2d877','Şifa ve dinginliği çağrıştırır.'],
+  ['Lavanta','#8c7ae6','#dcd6ff','#f5e079','Huzur, sakinlik ve zarif kokuyu simgeler.'],
+  ['İpekyolu','#d4619b','#fac2df','#f2ce6b','Yepyeni maceraları ve keşfi simgeler.'],
+  ['Kardelen','#8fb3cf','#d8ebfc','#f5e382','Zorluklara karşı direnci ve umudu simgeler.'],
+  ['Gelincik','#e63946','#ff99a1','#f4d068','Doğallığı ve saf sevgiyi simgeler.'],
+  ['Çarkıfelek','#9b51e0','#e2beff','#f2d165','Yaratıcılığı ve hayal gücünü simgeler.']
+];
+
+function normalizeName(s){
+  return s.trim().normalize('NFC').toLocaleUpperCase('tr-TR').replace(/[^A-ZÇĞİÖŞÜ]/g,'');
+}
+
+function getCombination(name){
+  const clean = normalizeName(name);
+  if(clean.length >= 2) return clean.slice(0, 2);
+  if(clean.length === 1) return clean + clean;
+  return 'AA';
+}
+
+function pickFlower(pair){
+  let score = 0;
+  for(let i = 0; i < pair.length; i++){
+    score = (score * 37 + pair.charCodeAt(i)) % 100003;
+  }
+  return flowerTypes[score % flowerTypes.length];
+}
+
+function svgFlower(item, pairCode){
+  let [name, c1, c2, center] = item;
+  let idx = (pairCode.charCodeAt(0) + pairCode.charCodeAt(1)) % 4;
+  let petals = 8 + idx;
+  let parts = '';
+  
+  for(let i = 0; i < petals; i++){
+    parts += `<ellipse cx="0" cy="-39" rx="14" ry="28" transform="rotate(${i * 360 / petals})" fill="url(#petalG)" stroke="#ffffff" stroke-opacity=".62" stroke-width="1.2"/>`;
+  }
+  
+  return `<svg viewBox="0 0 220 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${name} çiçeği">
+    <defs>
+      <linearGradient id="stemG" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8ac47b"/><stop offset="1" stop-color="#35764f"/></linearGradient>
+      <radialGradient id="petalG"><stop stop-color="${c2}"/><stop offset="1" stop-color="${c1}"/></radialGradient>
+    </defs>
+    <ellipse cx="110" cy="229" rx="46" ry="7" fill="#9a7c8240"/>
+    <path d="M111 117 Q103 170 111 220" fill="none" stroke="url(#stemG)" stroke-width="7" stroke-linecap="round"/>
+    <path d="M109 172 Q65 136 67 176 Q89 197 109 180Z" fill="#66a96e" stroke="#4b8d5c" stroke-width="1.5"/>
+    <path d="M112 194 Q152 151 164 180 Q146 207 112 202Z" fill="#4c955f" stroke="#38784c" stroke-width="1.5"/>
+    <g transform="translate(110 91)">${parts}<circle r="22" fill="${center}" stroke="#fff4d7" stroke-width="4"/><circle r="12" fill="#f8df8a" opacity=".85"/></g>
+  </svg>`;
+}
+
+const input = document.getElementById('nameInput');
+const result = document.getElementById('result');
+const scene = document.getElementById('scene');
+
+function showItem(raw){
+  const clean = raw.trim();
+  if(!clean){
+    input.focus();
+    input.setCustomValidity('Lütfen önce ismini yaz.');
+    input.reportValidity();
+    input.setCustomValidity('');
+    return;
+  }
+  const pair = getCombination(clean);
+  const item = pickFlower(pair);
+  const displayLetter = normalizeName(clean).charAt(0) || pair.charAt(0);
+
+  document.getElementById('resultTitle').textContent = clean + ' için eşleşen çiçek!';
+  document.getElementById('resultSub').textContent = 'İsmin özel kombinasyonuna göre hazırlandı.';
+  document.getElementById('cardPair').textContent = displayLetter;
+  document.getElementById('itemArt').innerHTML = svgFlower(item, pair);
+  document.getElementById('itemName').textContent = item[0];
+  document.getElementById('meaning').textContent = item[4] || 'Doğanın renkli ve özel bir üyesi.';
+  
+  scene.classList.remove('flipped');
+  result.classList.add('show');
+  setTimeout(() => result.scrollIntoView({behavior:'smooth', block:'nearest'}), 50);
+}
+
+function flip(){ scene.classList.toggle('flipped'); }
+
+document.getElementById('revealBtn').addEventListener('click', () => showItem(input.value));
+input.addEventListener('keydown', e => { if(e.key === 'Enter') showItem(input.value); });
+scene.addEventListener('click', flip);
+scene.addEventListener('keydown', e => {
+  if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); }
+});
+document.getElementById('againBtn').addEventListener('click', () => {
+  input.value = '';
+  result.classList.remove('show');
+  scene.classList.remove('flipped');
+  input.focus();
+});
+</script></body></html>
